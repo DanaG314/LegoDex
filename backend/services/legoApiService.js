@@ -1,15 +1,15 @@
 const BASE_URL = 'https://brickset.com/api/v3.asmx';
-const KEY = '3-Pzig-yzHc-5QmqV';
+const KEY = '3-hpvm-btCu-ijl04';
 
 const USERNAME = 'dana314';
 const PASSWORD = 'TZ64v0BlZC';
 
 const obtainHashKey = async () => {
-  const response = await fetch(
+  const res = await fetch(
     `${BASE_URL}/login?apiKey=${KEY}&username=${USERNAME}&password=${PASSWORD}`
   );
 
-  return response.json();
+  return res.json();
 };
 
 const getSets = async (hash) => {
@@ -23,9 +23,9 @@ const getSets = async (hash) => {
   // create url for fetch
   const url = `${BASE_URL}/getSets?apiKey=${KEY}&userHash=${hash}&params=${encodedParams}`;
   // do fetch and return response
-  const response = await fetch(url);
+  const res = await fetch(url);
 
-  return await response.json();
+  return await res.json();
 };
 
 module.exports = {
