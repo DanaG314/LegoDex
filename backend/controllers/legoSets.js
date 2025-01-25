@@ -1,16 +1,16 @@
 const LegoSet = require('../models/legoSets');
+const { obtainHashKey, getSets } = require('../services/legoApiService.js');
 
-// module.exports = {
-//   create,
-//   index,
-// };
+module.exports = {
+  index,
+};
 
 async function index(req, res) {
   try {
-    const legoSets = await LegoSet.find({})
-      .populate('setId')
-      .sort({ year: '2024' });
-    res.status(200).json(legoSets);
+    const { hash } = await obtainHashKey();
+    const resp = await getSets(hash);
+
+    res.json(resp);
   } catch (err) {
     res.status(500).json({ err: err.message });
   }
