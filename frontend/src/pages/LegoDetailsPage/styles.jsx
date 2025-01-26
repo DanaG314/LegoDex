@@ -1,7 +1,7 @@
 import { Card } from 'primereact/card';
 import styled from 'styled-components';
 
-export const LegoCard = styled(Card)`
+export const LegoDetailsCard = styled(Card)`
   border: 1px solid black;
   .p-card-header {
     display: flex;
@@ -25,11 +25,8 @@ export const LegoContainer = styled.div`
   width: 80%;
 `;
 
-export const HomePageContainer = styled.div`
+export const StyledDiv = styled.div`
   display: flex;
-  width: 80%;
-`;
-
-export const Filters = styled.div`
-  min-width: 250px;
+  flex-direction: row;
+  justify-content: space-between;
 `;

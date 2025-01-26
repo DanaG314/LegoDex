@@ -12,6 +12,18 @@ const obtainHashKey = async () => {
   return res.json();
 };
 
+const getSet = async (hash, id) => {
+  const params = {
+    setID: id,
+  };
+  const encodedParams = encodeURIComponent(JSON.stringify(params));
+  const url = `${BASE_URL}/getSets?apiKey=${KEY}&userHash=${hash}&params=${encodedParams}`;
+  // do fetch and return response
+  const res = await fetch(url);
+
+  return await res.json();
+};
+
 const getSets = async (hash) => {
   const params = {
     year: 2025,
@@ -31,4 +43,5 @@ const getSets = async (hash) => {
 module.exports = {
   obtainHashKey,
   getSets,
+  getSet,
 };

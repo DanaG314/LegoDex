@@ -1,15 +1,33 @@
 const LegoSet = require('../models/legoSets');
-const { obtainHashKey, getSets } = require('../services/legoApiService.js');
+const {
+  obtainHashKey,
+  getSets,
+  getSet,
+} = require('../services/legoApiService.js');
 
 module.exports = {
   index,
+  show,
 };
 
 async function index(req, res) {
   try {
+    // getting userHash
     const { hash } = await obtainHashKey();
+    // calling getSets passing userHash
     const resp = await getSets(hash);
 
+    res.json(resp);
+  } catch (err) {
+    res.status(500).json({ err: err.message });
+  }
+}
+
+async function show(req, res) {
+  const id = req.params.legoSetId;
+  try {
+    const { hash } = await obtainHashKey();
+    const resp = await getSet(hash, id);
     res.json(resp);
   } catch (err) {
     res.status(500).json({ err: err.message });

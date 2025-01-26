@@ -21,11 +21,11 @@ app.use(express.json());
 app.use(require('./middleware/checkToken'));
 
 // API Routes
+app.use('/api/lego-sets', require('./routes/legoSets'));
 app.use('/api/auth', require('./routes/auth'));
 
 // All routers below will have all routes protected
 app.use(require('./middleware/ensureLoggedIn'));
-app.use('/api/lego-sets', require('./routes/legoSets'));
 
 // Use a "catch-all" route to deliver the frontend's production index.html
 app.get('*', function (req, res) {
