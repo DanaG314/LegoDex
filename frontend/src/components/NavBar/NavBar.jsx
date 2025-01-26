@@ -17,7 +17,7 @@ export default function NavBar({ user, setUser }) {
   function handleLogOut() {
     logOut();
     setUser(null);
-    navigate('/posts');
+    navigate('/');
   }
 
   const itemRenderer = (item) => (
@@ -36,6 +36,9 @@ export default function NavBar({ user, setUser }) {
     {
       label: 'Home',
       icon: 'pi pi-home',
+      command: () => {
+        navigate('/');
+      },
     },
     {
       label: 'Sets',
@@ -71,19 +74,46 @@ export default function NavBar({ user, setUser }) {
       className='mr-2'
     ></img>
   );
+
   const end = (
-    <div className='flex align-items-center gap-2'>
+    <div className='align-items-center gap-2' style={{ display: 'flex' }}>
       <InputText
         placeholder='Search...'
         type='text'
         className='w-8rem sm:w-auto'
+        style={{ marginRight: 5 }}
       />
-      &nbsp; | &nbsp;
-      <Link to='' onClick={handleLogOut}>
-        Log Out
-      </Link>
-      &nbsp; | &nbsp;
-      <span>Welcome, {user?.name}</span>
+      {user ? (
+        <>
+          <span className='p-menuitem-link'>
+            Welcome, {user?.name}&nbsp;|&nbsp;
+          </span>
+          <a
+            className='p-menuitem-link'
+            style={{ marginLeft: 5, marginRight: 5 }}
+            onClick={handleLogOut}
+          >
+            Log Out
+          </a>
+        </>
+      ) : (
+        <>
+          <Link
+            className='p-menuitem-link'
+            style={{ marginLeft: 5, marginRight: 5 }}
+            to='/login'
+          >
+            Log In
+          </Link>
+          <Link
+            className='p-menuitem-link'
+            style={{ marginLeft: 5, marginRight: 5 }}
+            to='/signup'
+          >
+            Sign Up
+          </Link>
+        </>
+      )}
     </div>
   );
 
