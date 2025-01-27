@@ -1,9 +1,8 @@
-import { NavLink, Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { logOut } from '../../services/authService';
 import { InputText } from 'primereact/inputtext';
 import { Menubar } from 'primereact/menubar';
 import { Badge } from 'primereact/badge';
-import { Avatar } from 'primereact/avatar';
 import styled from 'styled-components';
 // import './NavBar.css';
 
