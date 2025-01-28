@@ -1,14 +1,14 @@
-const BASE_URL = 'https://brickset.com/api/v3.asmx';
-const KEY = '3-hpvm-btCu-ijl04';
+const BASE_URL = process.env.BASE_URL;
+const KEY = process.env.KEY;
+const USERNAME = process.env.USERNAME;
+const PASSWORD = process.env.PASSWORD;
 
-const USERNAME = 'dana314';
-const PASSWORD = 'TZ64v0BlZC';
-
+// used to login to lego api - returns hashkey
 const obtainHashKey = async () => {
   const res = await fetch(
+    // makes HTTP request to this url and returns a promise
     `${BASE_URL}/login?apiKey=${KEY}&username=${USERNAME}&password=${PASSWORD}`
   );
-
   return res.json();
 };
 
@@ -21,15 +21,21 @@ const getSet = async (hash, id) => {
   // do fetch and return response
   const res = await fetch(url);
 
-  return await res.json();
+  return res.json();
 };
 
-const getSets = async (hash) => {
+const getSets = async (hash, search = '') => {
   const params = {
     year: 2025,
     orderBy: 'RatingDESC',
     extendedData: true,
+    pageSize: 50,
   };
+
+  if (search != '') {
+    params['query'] = search;
+  }
+
   // encodes the params so we get '{ "years": 2025, ... }' "
   const encodedParams = encodeURIComponent(JSON.stringify(params));
   // create url for fetch

@@ -5,6 +5,7 @@ import 'primereact/resources/themes/lara-light-cyan/theme.css';
 import './App.css';
 import HomePage from '../HomePage/HomePage';
 import LegoDetailsPage from '../LegoDetailsPage/LegoDetailsPage';
+import MyCollectionPage from '../MyCollectionPage/MyCollectionPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
@@ -24,7 +25,7 @@ export default function App() {
             <Routes>
               {/* if no user available render auth routes */}
               {user ? (
-                <Route path='/collections' element={<p>Collections</p>} />
+                <Route path='/my-collection' element={<MyCollectionPage />} />
               ) : (
                 <>
                   <Route
