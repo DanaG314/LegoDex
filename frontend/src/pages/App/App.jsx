@@ -9,40 +9,44 @@ import SignUpPage from '../SignUpPage/SignUpPage';
 import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
 import { PrimeReactProvider } from 'primereact/api';
+import { SearchContext } from '../../searchContext';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
+  const [search, setSearch] = useState('');
 
   return (
-    <PrimeReactProvider>
-      <main className='App'>
-        <NavBar user={user} setUser={setUser} />
-        <section id='main-section'>
-          <Routes>
-            {/* if no user available render auth routes */}
-            {user ? (
-              <Route path='/collections' element={<p>Collections</p>} />
-            ) : (
-              <>
-                <Route
-                  path='/signup'
-                  element={<SignUpPage setUser={setUser} />}
-                />
-                <Route
-                  path='/login'
-                  element={<LoginPage setUser={setUser} />}
-                />
-              </>
-            )}
+    <SearchContext.Provider value={search}>
+      <PrimeReactProvider>
+        <main className='App'>
+          <NavBar user={user} setUser={setUser} setSearch={setSearch} />
+          <section id='main-section'>
+            <Routes>
+              {/* if no user available render auth routes */}
+              {user ? (
+                <Route path='/collections' element={<p>Collections</p>} />
+              ) : (
+                <>
+                  <Route
+                    path='/signup'
+                    element={<SignUpPage setUser={setUser} />}
+                  />
+                  <Route
+                    path='/login'
+                    element={<LoginPage setUser={setUser} />}
+                  />
+                </>
+              )}
 
-            <Route path='/' element={<HomePage />} />
-            <Route
-              path='/lego-sets/:legoSetId'
-              element={<LegoDetailsPage user={user} />}
-            />
-          </Routes>
-        </section>
-      </main>
-    </PrimeReactProvider>
+              <Route path='/' element={<HomePage />} />
+              <Route
+                path='/lego-sets/:legoSetId'
+                element={<LegoDetailsPage user={user} />}
+              />
+            </Routes>
+          </section>
+        </main>
+      </PrimeReactProvider>
+    </SearchContext.Provider>
   );
 }
