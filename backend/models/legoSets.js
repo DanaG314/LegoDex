@@ -24,7 +24,7 @@ const userLegoSchema = new Schema(
     availabilityStatus: {
       type: String,
       enum: ['Available', 'Hard to Find', 'Leaving Soon', 'Retired'],
-      required: true,
+      required: false,
       default: 'Available',
     },
     condition: {
