@@ -64,31 +64,33 @@ export default function NavBar({ user, setUser, setSearch }) {
         navigate('/');
       },
     },
-    {
-      label: 'Sets',
-      icon: 'pi pi-search',
-      items: [
-        {
-          label: 'All Sets',
-          icon: 'pi pi-bolt',
-          template: itemRenderer,
-        },
-        {
-          label: 'Themes',
-          icon: 'pi pi-server',
-          template: itemRenderer,
-        },
-        {
-          label: 'Release Year',
-          icon: 'pi pi-pencil',
-          template: itemRenderer,
-        },
-        {
-          separator: true,
-        },
-      ],
-    },
   ];
+  const userSets = {
+    label: 'Sets',
+    icon: 'pi pi-search',
+    items: [
+      {
+        label: 'New Releases',
+        icon: 'pi pi-bolt',
+        template: itemRenderer,
+      },
+      {
+        label: 'Retiring Soon',
+        icon: 'pi pi-server',
+        template: itemRenderer,
+      },
+      {
+        label: 'My Collection',
+        icon: 'pi pi-pencil',
+        template: itemRenderer,
+        command: () => navigate('/my-collection'),
+      },
+    ],
+  };
+
+  if (user) {
+    items.push(userSets);
+  }
 
   // const start = (            <------- use later for LEGODEX logo
   //   <img
@@ -146,28 +148,6 @@ export default function NavBar({ user, setUser, setSearch }) {
   );
 
   return (
-    // <nav className='NavBar'>
-    //   <NavLink to='/'>Home</NavLink>
-    //   &nbsp; | &nbsp;
-    //   {user ? (
-    //     <>
-    //       <NavLink to='/my-collection'>My Collection</NavLink>
-    //       &nbsp; | &nbsp;
-    //       <Link to='' onClick={handleLogOut}>
-    //         Log Out
-    //       </Link>
-    //       &nbsp; | &nbsp;
-    //       <span>Welcome, {user.name}</span>
-    //     </>
-    //   ) : (
-    //     <>
-    //       <NavLink to='/login'>Log In</NavLink>
-    //       &nbsp; | &nbsp;
-    //       <NavLink to='/signup'>Sign Up</NavLink>
-    //     </>
-    //   )}
-    // </nav>
-
     <div className='card'>
       <CustomNavBar model={items} end={end} />
     </div>

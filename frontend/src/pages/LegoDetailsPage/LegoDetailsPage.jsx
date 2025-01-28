@@ -11,14 +11,14 @@ const LegoDetailsPage = ({ user }) => {
   useEffect(() => {
     const fetchLego = async () => {
       try {
-        const response = await legoService.show(legoSetId);
+        const response = await legoService.show(legoSetId); // calls show from legoService to fetch details for a specific set
         setLego(response.sets[0]);
       } catch (error) {
         console.error('Error fetching Lego sets:', error);
       }
     };
-    fetchLego();
-  }, [legoSetId]);
+    fetchLego(); // starts process of fetching the set
+  }, [legoSetId]); // runs when legoSetId value changes
 
   return (
     <Panel header={lego?.name}>
