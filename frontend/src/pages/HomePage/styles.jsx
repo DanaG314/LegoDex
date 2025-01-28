@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 export const LegoCard = styled(Card)`
   border: 1px solid black;
+  background-color: #c42317;
+  color: white;
   .p-card-header {
     display: flex;
     justify-content: center;

@@ -10,6 +10,8 @@ import { SearchContext } from '../../searchContext';
 
 const CustomNavBar = styled(Menubar)`
   height: 100px;
+  background-color: #c42317;
+  color: white;
 `;
 
 export default function NavBar({ user, setUser, setSearch }) {
