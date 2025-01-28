@@ -9,3 +9,7 @@ export async function index() {
 export async function show(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }
+
+export async function search(query) {
+  return sendRequest(BASE_URL, 'POST', { query: query });
+}
