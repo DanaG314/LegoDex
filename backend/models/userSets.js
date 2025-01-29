@@ -8,6 +8,10 @@ const userLegoSchema = new Schema(
       required: true,
       ref: 'User',
     },
+    legoName: {
+      type: String,
+      required: true,
+    },
     legoId: {
       type: String,
       required: true,
@@ -32,6 +36,13 @@ const userLegoSchema = new Schema(
       enum: ['Opened', 'Unopened'],
       default: 'Opened',
     },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    imageURL: {
+      type: String,
+    },
     notes: {
       type: String,
       required: false,
@@ -42,4 +53,4 @@ const userLegoSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model('LegoSet', userLegoSchema);
+module.exports = mongoose.model('UserLegoSet', userLegoSchema);
