@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { Panel } from 'primereact/panel';
 import * as legoService from '../../services/legoService';
 import { StyledDiv } from './styles';
+import LegoSetForm from '../../components/LegoSetForm/LegoSetForm';
 
 const LegoDetailsPage = ({ user }) => {
   const { legoSetId } = useParams();
   const [lego, setLego] = useState([]);
+  const [dropdown, setDropdown] = useState(false);
 
   useEffect(() => {
     const fetchLego = async () => {
@@ -21,14 +23,25 @@ const LegoDetailsPage = ({ user }) => {
   }, [legoSetId]); // runs when legoSetId value changes
 
   return (
-    <Panel header={lego?.name}>
-      <img src={lego?.image?.imageURL} />
-      <StyledDiv>
-        <p>{lego?.setID}</p>
-        <p>{lego?.rating}</p>
-      </StyledDiv>
-      {user && <button>Add to Collection</button>}
-    </Panel>
+    <>
+      <Panel header={lego?.name}>
+        <img src={lego?.image?.imageURL} />
+        <StyledDiv>
+          <p>{lego?.setID}</p>
+          <p>{lego?.rating}</p>
+        </StyledDiv>
+        {user && (
+          <button
+            onClick={() => {
+              setDropdown(!dropdown);
+            }}
+          >
+            Add to Collection
+          </button>
+        )}
+      </Panel>
+      {dropdown && <LegoSetForm />}
+    </>
   );
 };
 
