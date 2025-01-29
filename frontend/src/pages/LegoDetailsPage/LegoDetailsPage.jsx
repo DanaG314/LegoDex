@@ -40,7 +40,16 @@ const LegoDetailsPage = ({ user }) => {
           </button>
         )}
       </Panel>
-      {dropdown && <LegoSetForm />}
+      {dropdown && (
+        <LegoSetForm
+          legoId={lego.setID}
+          number={lego.number}
+          numberVariant={lego.numberVariant}
+          rating={lego.rating}
+          imageURL={lego.image.imageURL}
+          legoName={lego.name}
+        />
+      )}
     </>
   );
 };

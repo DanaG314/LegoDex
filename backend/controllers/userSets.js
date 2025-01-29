@@ -25,42 +25,50 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
-  const { legoId } = req.params;
   const { _id } = req.user;
   console.log(_id);
   const {
     availabilityStatus,
+    inWishlist,
+    inFavourites,
     condition,
     numberVariant,
     number,
     name,
     imageURL,
     rating,
+    notes,
   } = req.body;
 
   try {
     const generatedLegoId = `${number}-${numberVariant}`;
+    console.log(generatedLegoId);
 
-    const existingLego = await UserLego.findOne({
-      user: _id,
-      legoId: generatedLegoId,
-    });
-    if (existingLego) {
-      return res.status(400).json({ message: 'Already owned set' });
-    }
-
-    const userLego = new UserLego({
+    // const existingLego = await UserLego.findOne({
+    //   user: _id,
+    //   legoId: generatedLegoId,
+    // });
+    // if (existingLego) {
+    //   return res.status(400).json({ message: 'Already owned set' });
+    // }
+    const set = {
       user: _id,
       legoId: generatedLegoId,
       inCollection: true,
       availabilityStatus,
+      inWishlist,
+      inFavourites,
       condition,
-      name,
+      legoName: name,
       imageURL,
       rating,
-    });
+      notes,
+    };
+    console.log(set);
 
-    await userLego.save();
+    const userLego = await UserLego.create(set);
+    console.log(userLego);
+
     res.status(201).json({ message: 'Lego set added succefully', userLego });
   } catch (err) {
     res.status(500).json({ error: `ERROR: ${err}` });
@@ -93,7 +101,3 @@ async function create(req, res) {
 //     res.status(500).json({ error: `ERROR: ${err}` });
 //   }
 // }
-
-async function index(req, res) {
-  const foundSets = await Lego.find({}).sort('-createdAt');
-}

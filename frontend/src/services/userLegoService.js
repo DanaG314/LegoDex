@@ -9,3 +9,7 @@ export async function index() {
 export async function show(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }
+
+export async function create(set) {
+  return sendRequest(`${BASE_URL}/${set.legoId}`, 'POST', set);
+}

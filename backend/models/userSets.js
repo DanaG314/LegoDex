@@ -16,9 +16,6 @@ const userLegoSchema = new Schema(
       type: String,
       required: true,
     },
-    inCollection: {
-      type: Boolean,
-    },
     inWishlist: {
       type: Boolean,
     },
@@ -45,7 +42,6 @@ const userLegoSchema = new Schema(
     },
     notes: {
       type: String,
-      required: false,
     },
   },
   {
