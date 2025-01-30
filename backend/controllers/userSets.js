@@ -8,6 +8,8 @@ const {
 module.exports = {
   create,
   index,
+  showUserSet,
+  update,
 };
 
 async function index(req, res) {
@@ -21,6 +23,32 @@ async function index(req, res) {
     res.json(sets);
   } catch (err) {
     res.status(500).json({ err: err.message });
+  }
+}
+
+async function showUserSet(req, res) {
+  console.log(req.params);
+  try {
+    const set = await UserLego.findById(req.params.legoId);
+    res.status(200).json(set);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function update(req, res) {
+  try {
+    const { legoId } = req.params;
+    const updates = req.body;
+
+    const updatedSet = await UserLego.findOneAndUpdate(
+      { _id: legoId, user: req.user._id },
+      updates,
+      { new: true }
+    );
+    res.status(200).json({ message: 'Lego set not found or unauthorized' });
+  } catch (err) {
+    console.log(err);
   }
 }
 
@@ -42,15 +70,7 @@ async function create(req, res) {
 
   try {
     const generatedLegoId = `${number}-${numberVariant}`;
-    console.log(generatedLegoId);
 
-    // const existingLego = await UserLego.findOne({
-    //   user: _id,
-    //   legoId: generatedLegoId,
-    // });
-    // if (existingLego) {
-    //   return res.status(400).json({ message: 'Already owned set' });
-    // }
     const set = {
       user: _id,
       legoId: generatedLegoId,
@@ -74,30 +94,3 @@ async function create(req, res) {
     res.status(500).json({ error: `ERROR: ${err}` });
   }
 }
-
-// try {
-//   let userLego = await UserLego.findOne({
-//     user: _id,
-//     legoId: `${number}-${numberVariant}`,
-//   });
-
-// if (!userLego) {
-//   userLego = new UserLego({
-//     user: _id,
-//     legoId: `${number}-${numberVariant}`,
-//     inCollection: true,
-//     availabilityStatus,
-//     condition,
-//   });
-//   console.log(userLego);
-// } else {
-//   userLego.inCollection = true;
-//   userLego.availabilityStatus = availabilityStatus;
-//   userLego.condition = condition;
-// }
-//     await userLego.save();
-//     res.status(201).json({ message: 'Lego set added' });
-//   } catch (err) {
-//     res.status(500).json({ error: `ERROR: ${err}` });
-//   }
-// }

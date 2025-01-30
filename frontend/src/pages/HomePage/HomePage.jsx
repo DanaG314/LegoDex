@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import * as legoService from '../../services/legoService';
-import { HomePageContainer, LegoCard, LegoContainer } from './styles';
+import { PageContainer, LegoCard, LegoContainer } from './styles';
 import { Link } from 'react-router';
 import { SearchContext } from '../../searchContext';
 
@@ -33,7 +33,7 @@ const HomePage = () => {
   return (
     <>
       <h1>Lego Sets</h1>
-      <HomePageContainer>
+      <PageContainer>
         <LegoContainer>
           {legos?.map((lego) => (
             <LegoCard
@@ -48,7 +48,7 @@ const HomePage = () => {
             ></LegoCard>
           ))}
         </LegoContainer>
-      </HomePageContainer>
+      </PageContainer>
     </>
   );
 };

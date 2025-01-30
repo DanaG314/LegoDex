@@ -1,6 +1,7 @@
 import { Checkbox } from 'primereact/checkbox';
 import { Dropdown } from 'primereact/dropdown';
 import { useState } from 'react';
+import { Availability } from './styles';
 import * as userLegoService from '../../services/userLegoService';
 import { useNavigate } from 'react-router';
 
@@ -73,7 +74,7 @@ const LegoSetForm = ({
   return (
     <>
       <form autoComplete='off' onSubmit={handleSubmit}>
-        <div className='availability-select'>
+        <section>
           <label htmlFor='availabilityStatus'>Availability Status: </label>
           <Dropdown
             value={availabilityStatus}
@@ -83,7 +84,7 @@ const LegoSetForm = ({
             placeholder='Select status'
             className='w-full md:w-14rem'
           />
-        </div>
+        </section>
         <div className='card flex justify-content-center'>
           <label htmlFor='condition'>Condition: </label>
           <Dropdown

@@ -10,6 +10,11 @@ export const LegoCard = styled(Card)`
     justify-content: center;
     align-items: center;
     padding: 20px;
+    color: white;
+
+    .p-card-subtitle {
+      color: white;
+    }
 
     img {
       width: 250px;
@@ -27,7 +32,7 @@ export const LegoContainer = styled.div`
   width: 80%;
 `;
 
-export const HomePageContainer = styled.div`
+export const PageContainer = styled.div`
   display: flex;
   width: 80%;
 `;

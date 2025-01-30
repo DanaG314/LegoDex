@@ -6,6 +6,7 @@ import './App.css';
 import HomePage from '../HomePage/HomePage';
 import LegoDetailsPage from '../LegoDetailsPage/LegoDetailsPage';
 import MyCollectionPage from '../MyCollectionPage/MyCollectionPage';
+import UserLegoDetailsPage from '../UseLegoDetailsPage/UserLegoDetailsPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
@@ -25,7 +26,13 @@ export default function App() {
             <Routes>
               {/* if no user available render auth routes */}
               {user ? (
-                <Route path='/my-collection' element={<MyCollectionPage />} />
+                <>
+                  <Route path='/my-collection' element={<MyCollectionPage />} />
+                  <Route
+                    path='/my-collection/:legoId'
+                    element={<UserLegoDetailsPage user={user} />}
+                  />
+                </>
               ) : (
                 <>
                   <Route
