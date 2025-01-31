@@ -27,14 +27,14 @@ export const LegoCard = styled(Card)`
 export const LegoContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
   grid-gap: 45px;
-  width: 80%;
+  width: 100%;
 `;
 
 export const PageContainer = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
 `;
 
 export const Filters = styled.div`

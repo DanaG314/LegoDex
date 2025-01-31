@@ -33,6 +33,7 @@ const getSets = async (hash, search = '') => {
   };
 
   if (search != '') {
+    delete params.year;
     params['query'] = search;
   }
 

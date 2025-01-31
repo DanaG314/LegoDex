@@ -13,6 +13,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import NavBar from '../../components/NavBar/NavBar';
 import { PrimeReactProvider } from 'primereact/api';
 import { SearchContext } from '../../searchContext';
+import MyWishlistPage from '../WishlistPage/WishlistPage';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -46,6 +47,13 @@ export default function App() {
                         handleDeleteSet={handleDeleteSet}
                       />
                     }
+                  />
+                  <Route path='/my-wishlist' element={<MyWishlistPage />} />
+                  <Route
+                    path='/my-wishlist/:legoId'
+                    element={<UserLegoDetailsPage />}
+                    user={user}
+                    handleDeleteSet={handleDeleteSet}
                   />
                 </>
               ) : (

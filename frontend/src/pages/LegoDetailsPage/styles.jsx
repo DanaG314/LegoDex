@@ -16,6 +16,7 @@ export const LegoDetailsCard = styled(Card)`
       width: 250px;
       height: 250px;
       object-fit: contain;
+      border-radius: ;
     }
   }
 `;

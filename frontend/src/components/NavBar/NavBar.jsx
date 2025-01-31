@@ -87,6 +87,11 @@ export default function NavBar({ user, setUser, setSearch }) {
         template: itemRenderer,
         command: () => navigate('/my-collection'),
       },
+      {
+        label: 'My Wishlist',
+        template: itemRenderer,
+        command: () => navigate('/my-wishlist'),
+      },
     ],
   };
 
