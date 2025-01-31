@@ -108,23 +108,3 @@ const MyCollectionPage = () => {
 };
 
 export default MyCollectionPage;
-
-{
-  /* <h1>Lego Sets</h1>
-      <HomePageContainer>
-        <LegoContainer>
-          {legos?.map((lego) => (
-            <LegoCard
-              key={lego.setID}
-              title={lego.name}
-              subTitle={`${lego.number} - ${lego.rating} ⭐️`}
-              header={
-                <Link to={`/lego-sets/${lego.setID}`}>
-                  <img src={lego.image.imageURL} />
-                </Link>
-              }
-            ></LegoCard>
-          ))}
-        </LegoContainer>
-      </HomePageContainer> */
-}
