@@ -1,5 +1,5 @@
 <div align="center" id="banner">
-    <img width="600" height="300" alt="BingeBuddy banner" src="/public/images/logo.png">
+    <img width="600" height="300" alt="LegoDex banner" src="/images/logo.png">
 </div>
 
 <div align="center" id="header">
@@ -14,10 +14,10 @@ Keep your Lego collection organized and up-to-date with LegoDex! Browse a variet
 
 ## 📸 Screenshots
 
-|        Screenshot        |                        Description                        |
-| :----------------------: | :-------------------------------------------------------: |
-| **HomePage for visitor** |    <img src="/public/images/homepage.png" width="300">    |
-|  **User's Collection**   | <img src="/public/images/usercollection.png" width="300"> |
+|        Screenshot        |                    Description                     |
+| :----------------------: | :------------------------------------------------: |
+| **HomePage for visitor** |    <img src="/images/homepage.png" width="300">    |
+|  **User's Collection**   | <img src="/images/usercollection.png" width="300"> |
 
 ## 💻 Technologies Used
 
@@ -33,7 +33,7 @@ Keep your Lego collection organized and up-to-date with LegoDex! Browse a variet
 
 Click to visit [LegoDex!][link]
 
-[link]: https://legodex-cec8317ea641.herokuapp.com/my-collection
+[link]: https://legodex-cec8317ea641.herokuapp.com
 
 <details open>
 <summary> 🗺️ Navigating the Website</summary>
