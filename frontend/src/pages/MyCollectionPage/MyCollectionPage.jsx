@@ -1,11 +1,15 @@
 import * as userLegoService from '../../services/userLegoService';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LegoContainer, LegoCard } from '../HomePage/styles';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { PageContainer } from './styles';
+import { SearchContext } from '../../searchContext';
 
 const MyCollectionPage = () => {
   const [mySets, setMySets] = useState([]);
+  const search = useContext(SearchContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchSets() {
@@ -18,6 +22,13 @@ const MyCollectionPage = () => {
     }
     fetchSets();
   }, []);
+
+  useEffect(() => {
+    console.log('Yo');
+    if (search !== '') {
+      navigate('/');
+    }
+  }, [search]);
 
   console.log('My sets', mySets);
   const wishlistSets = mySets.filter((set) => set.inWishlist);
