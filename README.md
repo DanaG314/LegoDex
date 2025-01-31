@@ -1,5 +1,5 @@
 <div align="center" id="banner">
-    <img width="600" height="300" alt="LegoDex banner" src="/images/logo.png">
+    <img width="600" height="300" alt="LegoDex banner" src="/frontend/public/images/logo.png">
 </div>
 
 <div align="center" id="header">
