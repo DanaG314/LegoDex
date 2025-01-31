@@ -1,14 +1,17 @@
 import * as userLegoService from '../../services/userLegoService';
 import { useEffect, useState } from 'react';
-import { LegoContainer, LegoCard } from '../HomePage/styles';
+import { LegoCard } from '../HomePage/styles';
 import { Link } from 'react-router';
 import { PageContainer } from './styles';
 import { Carousel } from 'primereact/carousel';
+import { BreadCrumb } from 'primereact/breadcrumb';
 
 // import { SearchContext } from '../../searchContext';
 
 const MyCollectionPage = () => {
   const [mySets, setMySets] = useState([]);
+  const items = [{ label: '🏠', url: '/' }, { label: 'My Collection' }];
+  const home = { icon: 'pi pi-home', url: '/' };
   // const search = useContext(SearchContext);
   const responsiveOptions = [
     {
@@ -63,7 +66,7 @@ const MyCollectionPage = () => {
       <LegoCard
         key={lego.setID}
         title={lego.legoName}
-        subTitle={`${lego?.legoId} - ${lego.rating} ⭐️`}
+        subTitle={`${lego?.legoId}`}
         header={
           <Link to={`/my-collection/${lego?._id}`}>
             <img src={lego?.imageURL} />
@@ -75,23 +78,22 @@ const MyCollectionPage = () => {
 
   return (
     <>
+      <BreadCrumb model={items} home={home} />
+
       <h1>My Collection</h1>
       <PageContainer>
-        <LegoContainer>
-          {collectionSets.map((lego) => (
-            <LegoCard
-              key={lego.setID}
-              title={lego.legoName}
-              subTitle={`${lego?.legoId} - ${lego.rating} ⭐️`}
-              header={
-                <Link to={`/my-collection/${lego?._id}`}>
-                  <img src={lego?.imageURL} />
-                </Link>
-              }
-            />
-          ))}
-        </LegoContainer>
-        <hr />
+        {collectionSets.length > 0 ? (
+          <Carousel
+            value={collectionSets}
+            numVisible={3}
+            numScroll={3}
+            responsiveOptions={responsiveOptions}
+            itemTemplate={productTemplate}
+          />
+        ) : (
+          <p>No sets in collection yet!</p>
+        )}
+
         <h1>My Wishlist</h1>
         <Carousel
           value={wishlistSets}

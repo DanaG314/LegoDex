@@ -30,8 +30,8 @@ const MyWishlistPage = () => {
           {wishlistSets.map((lego) => (
             <LegoCard
               key={lego.setID}
-              title={lego.name}
-              subTitle={`${lego?.legoId} - ${lego.rating} ⭐️`}
+              title={lego.legoName}
+              subTitle={`${lego?.legoId}`}
               header={
                 <Link to={`/my-wishlist/${lego?._id}`}>
                   <img src={lego?.imageURL} />

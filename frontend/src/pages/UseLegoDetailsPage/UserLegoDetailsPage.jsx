@@ -1,5 +1,6 @@
 import * as userLegoService from '../../services/userLegoService';
 import { useEffect, useState } from 'react';
+import { BreadCrumb } from 'primereact/breadcrumb';
 import { useParams } from 'react-router';
 import {
   LegoDetailsPanel,
@@ -13,6 +14,12 @@ const UserLegoDetailsPage = ({ handleDeleteSet }) => {
   const { legoId } = useParams();
   const [lego, setLego] = useState([]);
   const [dropdown, setDropdown] = useState(false);
+  const items = [
+    { label: '🏠', url: '/' },
+    { label: 'My Collection', url: '/my-collection' },
+    { label: `${lego.legoName}` },
+  ];
+  const home = { icon: 'pi pi-home', url: '/' };
 
   console.log(legoId);
   console.log('Lego', lego);
@@ -33,16 +40,23 @@ const UserLegoDetailsPage = ({ handleDeleteSet }) => {
 
   return (
     <>
+      <BreadCrumb model={items} home={home} />
+
       <LegoDetailsPanel header={lego?.legoName}>
         <LegoDetailsBody>
           <img src={lego.imageURL} />
           <LegoInfo>
-            <h2>{lego.legoId}</h2>
-            <h2>{lego.rating}</h2>
+            <h2>#{lego.legoId}</h2>
+            {!lego.rating ? <h1></h1> : <h2>⭐️{lego.rating}</h2>}
           </LegoInfo>
           <div>
-            <h2>Availability Status: {lego.availabilityStatus}</h2>
-            <p className='m-0'>Notes: {lego.notes}</p>
+            <h2>Status: {lego.availabilityStatus}</h2>
+            <h2>Condition: {lego.condition}</h2>
+            {!lego.notes ? (
+              <p>No notes were written for this set</p>
+            ) : (
+              <p className='m-0'>Notes: {lego.notes}</p>
+            )}
           </div>
           <UpdateAndDelete>
             <button

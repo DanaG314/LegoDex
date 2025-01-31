@@ -3,19 +3,20 @@ import styled from 'styled-components';
 
 export const LegoDetailsPanel = styled(Panel)`
   padding-top: 50px;
-  width: 80%;
 
   img {
     width: 400px;
-    height: auto;
+    height: 500px;
     display: flex;
     justify-self: center;
+    object-fit: contain;
   }
   header {
     background-color: red;
   }
 
   h2 {
+    text-align: left;
   }
 `;
 

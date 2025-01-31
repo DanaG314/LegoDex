@@ -11,7 +11,22 @@ import { SearchContext } from '../../searchContext';
 const CustomNavBar = styled(Menubar)`
   height: 100px;
   background-color: #c42317;
-  color: white;
+  color: #fffcef;
+
+  span {
+    color: #fffcef;
+  }
+
+  ul {
+    background-color: #c42317;
+  }
+
+  .p-menubar {
+    color: #fffcef;
+  }
+  .p-menuitem-link {
+    color: #fffcef;
+  }
 `;
 
 export default function NavBar({ user, setUser, setSearch }) {
@@ -73,16 +88,6 @@ export default function NavBar({ user, setUser, setSearch }) {
     icon: 'pi pi-search',
     items: [
       {
-        label: 'New Releases',
-        icon: 'pi pi-bolt',
-        template: itemRenderer,
-      },
-      {
-        label: 'Retiring Soon',
-        icon: 'pi pi-server',
-        template: itemRenderer,
-      },
-      {
         label: 'My Collection',
         icon: 'pi pi-pencil',
         template: itemRenderer,
@@ -100,14 +105,11 @@ export default function NavBar({ user, setUser, setSearch }) {
     items.push(userSets);
   }
 
-  // const start = (            <------- use later for LEGODEX logo
-  //   <img
-  //     alt='logo'
-  //     src='https://primefaces.org/cdn/primereact/images/logo.png'
-  //     height='40'
-  //     className='mr-2'
-  //   ></img>
-  // );
+  const start = (
+    <a href='/'>
+      <img alt='logo' src='/images/logo.png' height='40' className='mr-2'></img>
+    </a>
+  );
 
   const end = (
     <div className='align-items-center gap-2' style={{ display: 'flex' }}>
@@ -157,7 +159,7 @@ export default function NavBar({ user, setUser, setSearch }) {
 
   return (
     <div className='card'>
-      <CustomNavBar model={items} end={end} />
+      <CustomNavBar model={items} start={start} end={end} />
     </div>
   );
 }

@@ -11,6 +11,17 @@
 
 }
 
+
+
+nav.p-breadcrumb {
+  align-self: flex-start;
+  background-color: #c42317;
+}
+
+span.p-menuitem-text, path {
+  color: white;
+}
+
 body {
   background-image: url(https://i.pinimg.com/736x/27/aa/8d/27aa8d94bacf1699adbab54e167709b8.jpg);
   /* background-repeat: no-repeat;

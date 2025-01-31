@@ -21,7 +21,6 @@ body {
   min-height: 100vh;
 }
 
-.
 
 
 h1,
@@ -30,7 +29,6 @@ h2 {
 }
 
 button {
-  border: 0.5vmin solid #1a1a1a;
   border-radius: 0.5vmin;
   padding: 0.8vmin;
   font-size: 2vmin;
