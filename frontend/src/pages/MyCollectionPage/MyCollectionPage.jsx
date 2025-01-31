@@ -1,15 +1,39 @@
 import * as userLegoService from '../../services/userLegoService';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LegoContainer, LegoCard } from '../HomePage/styles';
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import { PageContainer } from './styles';
-import { SearchContext } from '../../searchContext';
+import { Carousel } from 'primereact/carousel';
+
+// import { SearchContext } from '../../searchContext';
 
 const MyCollectionPage = () => {
   const [mySets, setMySets] = useState([]);
-  const search = useContext(SearchContext);
+  // const search = useContext(SearchContext);
+  const responsiveOptions = [
+    {
+      breakpoint: '1400px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '1199px',
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '767px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '575px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchSets() {
@@ -23,16 +47,31 @@ const MyCollectionPage = () => {
     fetchSets();
   }, []);
 
-  useEffect(() => {
-    console.log('Yo');
-    if (search !== '') {
-      navigate('/');
-    }
-  }, [search]);
+  // useEffect(() => {
+  //   console.log('Yo');
+  //   if (search !== '') {
+  //     navigate('/');
+  //   }
+  // }, [search]);
 
   console.log('My sets', mySets);
   const wishlistSets = mySets.filter((set) => set.inWishlist);
   const collectionSets = mySets.filter((set) => !set.inWishlist);
+
+  const productTemplate = (lego) => {
+    return (
+      <LegoCard
+        key={lego.setID}
+        title={lego.legoName}
+        subTitle={`${lego?.legoId} - ${lego.rating} ⭐️`}
+        header={
+          <Link to={`/my-collection/${lego?._id}`}>
+            <img src={lego?.imageURL} />
+          </Link>
+        }
+      />
+    );
+  };
 
   return (
     <>
@@ -42,7 +81,7 @@ const MyCollectionPage = () => {
           {collectionSets.map((lego) => (
             <LegoCard
               key={lego.setID}
-              title={lego.name}
+              title={lego.legoName}
               subTitle={`${lego?.legoId} - ${lego.rating} ⭐️`}
               header={
                 <Link to={`/my-collection/${lego?._id}`}>
@@ -54,18 +93,13 @@ const MyCollectionPage = () => {
         </LegoContainer>
         <hr />
         <h1>My Wishlist</h1>
-        {wishlistSets.map((lego) => (
-          <LegoCard
-            key={lego.setID}
-            title={lego.name}
-            subTitle={`${lego?.legoId} - ${lego.rating} ⭐️`}
-            header={
-              <Link to={`/my-collection/${lego?._id}`}>
-                <img src={lego?.imageURL} />
-              </Link>
-            }
-          />
-        ))}
+        <Carousel
+          value={wishlistSets}
+          numVisible={3}
+          numScroll={3}
+          responsiveOptions={responsiveOptions}
+          itemTemplate={productTemplate}
+        />
       </PageContainer>
     </>
   );

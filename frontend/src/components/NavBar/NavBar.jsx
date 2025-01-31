@@ -34,6 +34,7 @@ export default function NavBar({ user, setUser, setSearch }) {
     if (e.key === 'Enter') {
       // checks if the key pressed is the Enter key, if it is that means
       // the user wants to preform a search
+      navigate('/');
       setSearch(searchVal); // this updates the search state, the value used for
       // this search is taken from searchVal which shows the users current input in the
       // search bar.

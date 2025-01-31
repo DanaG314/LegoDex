@@ -12,6 +12,8 @@ const LegoSetForm = ({
   inWishlist,
   legoName,
   legoId,
+  number,
+  numberVariant,
   rating,
   imageURL,
   legoNotes,
@@ -59,7 +61,8 @@ const LegoSetForm = ({
     evt.preventDefault();
     const set = {
       name: legoName,
-      legoId,
+      number,
+      numberVariant,
       rating,
       imageURL,
       inWishlist: wishlistChecked,

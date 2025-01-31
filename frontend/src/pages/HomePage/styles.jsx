@@ -29,12 +29,12 @@ export const LegoContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(1, 1fr);
   grid-gap: 45px;
-  width: 100%;
+  width: 80%;
 `;
 
 export const PageContainer = styled.div`
   display: flex;
-  width: 100%;
+  width: 80%;
 `;
 
 export const Filters = styled.div`

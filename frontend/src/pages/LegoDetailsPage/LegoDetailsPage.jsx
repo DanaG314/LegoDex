@@ -42,7 +42,7 @@ const LegoDetailsPage = ({ user }) => {
       </Panel>
       {dropdown && (
         <LegoSetForm
-          legoId={lego.setID}
+          legoId={lego.legoId}
           number={lego.number}
           numberVariant={lego.numberVariant}
           rating={lego.rating}
