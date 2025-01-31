@@ -18,6 +18,10 @@ export async function showUserSet(set) {
   return sendRequest(`${BASE_URL}/${set}`);
 }
 
-export async function update(set) {
-  return sendRequest(`${BASE_URL}/${set}`, 'PUT', set);
+export async function update(set, id) {
+  return sendRequest(`${BASE_URL}/${id}`, 'PUT', set);
+}
+
+export async function removeSet(id) {
+  return sendRequest(`${BASE_URL}/${id}`, 'DELETE'); // set not needed only id
 }

@@ -1,23 +1,36 @@
 import { Checkbox } from 'primereact/checkbox';
 import { Dropdown } from 'primereact/dropdown';
 import { useState } from 'react';
-import { Availability } from './styles';
 import * as userLegoService from '../../services/userLegoService';
 import { useNavigate } from 'react-router';
 
 const LegoSetForm = ({
+  id,
+  condition,
+  availabilityStatus,
+  inFavourites,
+  inWishlist,
   legoName,
   legoId,
   rating,
   imageURL,
-  number,
-  numberVariant,
+  legoNotes,
+  update,
 }) => {
-  const [wishlistChecked, setWishlistChecked] = useState(false);
-  const [favouritesChecked, setFavouritesChecked] = useState(false);
-  const [availabilityStatus, setAvailabilityStatus] = useState(null);
-  const [condition, setCondition] = useState(null);
-  const [notes, setNotes] = useState('');
+  const [wishlistChecked, setWishlistChecked] = useState(
+    inWishlist ? inWishlist : false
+  );
+  const [favouritesChecked, setFavouritesChecked] = useState(
+    inFavourites ? inFavourites : false
+  );
+  const [available, setAvailable] = useState(
+    availabilityStatus ? { name: availabilityStatus } : null
+  );
+  const [conditionState, setConditionState] = useState(
+    condition ? { name: condition } : null
+  );
+  const [notes, setNotes] = useState(legoNotes ? legoNotes : '');
+
   // const [set, setSet] = useState({
   //   legoName,
   //   legoId,
@@ -51,16 +64,19 @@ const LegoSetForm = ({
       imageURL,
       inWishlist: wishlistChecked,
       inFavourites: favouritesChecked,
-      availabilityStatus: availabilityStatus.name,
-      condition: condition.name,
-      number,
-      numberVariant,
+      availabilityStatus: available.name,
+      condition: conditionState.name,
       notes,
     };
     console.log(set);
     try {
-      await userLegoService.create(set);
-      navigate('/my-collection');
+      if (update) {
+        await userLegoService.update(set, id);
+        navigate('/my-collection');
+      } else {
+        await userLegoService.create(set);
+        navigate('/my-collection');
+      }
     } catch (err) {
       console.log(err);
     }
@@ -71,14 +87,16 @@ const LegoSetForm = ({
     setNotes(evt.target.value);
   };
 
+  console.log(available);
+
   return (
     <>
       <form autoComplete='off' onSubmit={handleSubmit}>
         <section>
           <label htmlFor='availabilityStatus'>Availability Status: </label>
           <Dropdown
-            value={availabilityStatus}
-            onChange={(e) => setAvailabilityStatus(e.value)}
+            value={available}
+            onChange={(e) => setAvailable(e.value)}
             options={stati}
             optionLabel='name'
             placeholder='Select status'
@@ -88,8 +106,8 @@ const LegoSetForm = ({
         <div className='card flex justify-content-center'>
           <label htmlFor='condition'>Condition: </label>
           <Dropdown
-            value={condition}
-            onChange={(e) => setCondition(e.value)}
+            value={conditionState}
+            onChange={(e) => setConditionState(e.value)}
             options={conditionStati}
             optionLabel='name'
             placeholder='Select status'
@@ -114,7 +132,12 @@ const LegoSetForm = ({
           ></Checkbox>
         </div>
         <label htmlFor='notes'>Notes: </label>
-        <textarea name='notes' id='notes' onChange={handleChange}></textarea>
+        <textarea
+          name='notes'
+          id='notes'
+          onChange={handleChange}
+          value={notes}
+        ></textarea>
         <button type='submit'>ADD SET</button>
       </form>
     </>

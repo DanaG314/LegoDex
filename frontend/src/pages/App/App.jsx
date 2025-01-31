@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Routes, Route } from 'react-router';
+import * as UserLegoService from '../../services/userLegoService';
+import { Routes, Route, useNavigate } from 'react-router';
 import { getUser } from '../../services/authService';
 import 'primereact/resources/themes/lara-light-cyan/theme.css';
 import './App.css';
@@ -16,6 +17,15 @@ import { SearchContext } from '../../searchContext';
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [search, setSearch] = useState('');
+  const [mySet, setMySet] = useState([]);
+
+  const navigate = useNavigate();
+
+  const handleDeleteSet = async (legoId) => {
+    const deletedSet = await UserLegoService.removeSet(legoId);
+    setMySet(mySet.filter((set) => set._id !== deletedSet._id));
+    navigate('/my-collection');
+  };
 
   return (
     <SearchContext.Provider value={search}>
@@ -30,7 +40,12 @@ export default function App() {
                   <Route path='/my-collection' element={<MyCollectionPage />} />
                   <Route
                     path='/my-collection/:legoId'
-                    element={<UserLegoDetailsPage user={user} />}
+                    element={
+                      <UserLegoDetailsPage
+                        user={user}
+                        handleDeleteSet={handleDeleteSet}
+                      />
+                    }
                   />
                 </>
               ) : (

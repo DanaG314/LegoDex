@@ -11,17 +11,20 @@ export const LegoDetailsPanel = styled(Panel)`
     display: flex;
     justify-self: center;
   }
+  header {
+    background-color: red;
+  }
+
+  h2 {
+  }
 `;
 
 export const LegoDetailsBody = styled.div`
   display: grid;
-  grid-template-columns: 3fr 9fr;
+  grid-template-columns: 3fr 6fr;
   grid-template-rows: 1fr;
 
   h2 {
-    grid-column-start: 1;
-  }
-  p {
     grid-column-start: 2;
     grid-row-start: 1;
   }
@@ -30,6 +33,8 @@ export const LegoDetailsBody = styled.div`
 export const LegoInfo = styled.div`
   display: flex;
   justify-content: space-between;
+  grid-column-start: 1;
+  grid-row-start: 2;
 `;
 
 export const UpdateAndDelete = styled.div`
